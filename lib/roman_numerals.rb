@@ -15,26 +15,25 @@ module RomanNumerals
   private
 
   def RomanNumerals.getHighestPowerOf10(input)
-    base = input.to_s[0].to_i
+    base = RomanNumerals.numberBase(input)
     base * (10**(input.to_s.length - 1))
   end
 
 #This must be passed a number that conforms to b * 10^x
   def RomanNumerals.powerOf10ToNumerals(input)
-    base = input.to_s[0].to_i
+    base = RomanNumerals.numberBase(input)
     exponent = Math.log10(input / base).to_i
     numeral = RomanNumerals.numeralForExponent(exponent)
     fifthNumeral = RomanNumerals.fifthNumeralForExponent(exponent)
 
-    if base <= 3
-      numeral * base
-    elsif base == 4
-      numeral + fifthNumeral
-    elsif base <= 8
-      fifthNumeral + numeral * (base - 5)
-    elsif base == 9
-      numeral + RomanNumerals.numeralForExponent(exponent + 1)
-    end
+    return numeral * base if base <= 3
+    return numeral + fifthNumeral if base == 4
+    return fifthNumeral + numeral * (base - 5) if base <= 8
+    return numeral + RomanNumerals.numeralForExponent(exponent + 1) if base == 9
+  end
+
+  def RomanNumerals.numberBase(input)
+    input.to_s[0].to_i
   end
 
   def RomanNumerals.numeralForExponent(exponent)

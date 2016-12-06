@@ -146,4 +146,13 @@ describe RomanNumerals do
       expect(RomanNumerals.getHighestPowerOf10(6)).to eq(6)
     end
   end
+
+  describe 'numberBase' do
+    it 'calculates proper base' do
+      expect(RomanNumerals.numberBase(2536)).to eq(2)
+      expect(RomanNumerals.numberBase(536)).to eq(5)
+      expect(RomanNumerals.numberBase(36)).to eq(3)
+      expect(RomanNumerals.numberBase(6)).to eq(6)
+    end
+  end
 end
