@@ -2,26 +2,38 @@ require "roman_numerals/version"
 
 module RomanNumerals
   def RomanNumerals.numberToNumerals(input)
-    return RomanNumerals.powerOf10ToNumerals(input)
+    raise "Input cannot be greater than 3000" unless input <= 3000
+    output = ""
+    while input != 0
+      highestPowerOf10 = RomanNumerals.getHighestPowerOf10(input)
+      output += RomanNumerals.powerOf10ToNumerals(highestPowerOf10)
+      input -= highestPowerOf10
+    end
+    output
   end
 
   private
 
+  def RomanNumerals.getHighestPowerOf10(input)
+    base = input.to_s[0].to_i
+    base * (10**(input.to_s.length - 1))
+  end
+
+#This must be passed a number that conforms to b * 10^x
   def RomanNumerals.powerOf10ToNumerals(input)
     base = input.to_s[0].to_i
     exponent = Math.log10(input / base).to_i
-    # raise "input must be a power of 10" unless exponent == Math.log10(input / base)
     numeral = RomanNumerals.numeralForExponent(exponent)
     fifthNumeral = RomanNumerals.fifthNumeralForExponent(exponent)
 
     if base <= 3
-      return numeral * base
+      numeral * base
     elsif base == 4
-      return numeral + fifthNumeral
+      numeral + fifthNumeral
     elsif base <= 8
-      return fifthNumeral + numeral * (base - 5)
+      fifthNumeral + numeral * (base - 5)
     elsif base == 9
-      return numeral + RomanNumerals.numeralForExponent(exponent + 1)
+      numeral + RomanNumerals.numeralForExponent(exponent + 1)
     end
   end
 

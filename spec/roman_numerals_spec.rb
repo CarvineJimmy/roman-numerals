@@ -45,6 +45,30 @@ describe RomanNumerals do
     it 'converts 10 to X' do
       expect(RomanNumerals.numberToNumerals(10)).to eq("X")
     end
+
+    it 'converts 111 to CXI' do
+      expect(RomanNumerals.numberToNumerals(111)).to eq("CXI")
+    end
+
+    it 'converts 526 to DXXVI' do
+      expect(RomanNumerals.numberToNumerals(526)).to eq("DXXVI")
+    end
+
+    it 'converts 1999 to MCMXCIX' do
+      expect(RomanNumerals.numberToNumerals(1999)).to eq("MCMXCIX")
+    end
+
+    it 'converts 2449 to MMCDXLIX' do
+      expect(RomanNumerals.numberToNumerals(2449)).to eq("MMCDXLIX")
+    end
+
+    it 'converts 3000 to MMM' do
+      expect(RomanNumerals.numberToNumerals(3000)).to eq("MMM")
+    end
+
+    it 'errors on numbers greater than 3000' do
+      expect { RomanNumerals.numberToNumerals(3001) }.to raise_error("Input cannot be greater than 3000")
+    end
   end
 
   describe 'powerOf10ToNumerals' do
@@ -102,6 +126,24 @@ describe RomanNumerals do
 
     it 'returns D for 2' do
       expect(RomanNumerals.fifthNumeralForExponent(2)).to eq("D")
+    end
+  end
+
+  describe 'getHighestPowerOf10' do
+    it 'works with a number in thousands' do
+      expect(RomanNumerals.getHighestPowerOf10(2536)).to eq(2000)
+    end
+
+    it 'works with a number in hundreds' do
+      expect(RomanNumerals.getHighestPowerOf10(536)).to eq(500)
+    end
+
+    it 'works with a number in tens' do
+      expect(RomanNumerals.getHighestPowerOf10(36)).to eq(30)
+    end
+
+    it 'works with a number in ones' do
+      expect(RomanNumerals.getHighestPowerOf10(6)).to eq(6)
     end
   end
 end
