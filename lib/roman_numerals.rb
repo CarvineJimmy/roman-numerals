@@ -1,6 +1,4 @@
-require "roman_numerals/version"
-
-module RomanNumerals
+class RomanNumerals
   def RomanNumerals.numberToNumerals(input)
     raise "Input cannot be greater than 3000" unless input <= 3000
     output = ""

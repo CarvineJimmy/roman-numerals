@@ -1,10 +1,6 @@
-require 'spec_helper'
+require "roman_numerals"
 
 describe RomanNumerals do
-  it 'has a version number' do
-    expect(RomanNumerals::VERSION).not_to be nil
-  end
-
   describe 'numberToNumerals' do
     it 'converts 1 to I' do
       expect(RomanNumerals.numberToNumerals(1)).to eq("I")
